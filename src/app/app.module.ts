@@ -12,7 +12,7 @@ import en from '@angular/common/locales/en';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch} from '@angular/common/http';
-import {CustomerComponent} from './customer/customer.component';
+
 import {NzAutosizeDirective, NzInputDirective, NzInputGroupComponent, NzInputModule} from 'ng-zorro-antd/input';
 import {NzButtonComponent, NzButtonModule} from 'ng-zorro-antd/button';
 import {NzDatePickerComponent, NzDatePickerModule, NzRangePickerComponent} from 'ng-zorro-antd/date-picker';
@@ -24,9 +24,9 @@ import {NzSelectComponent, NzSelectModule} from 'ng-zorro-antd/select';
 import {NzFormDirective, NzFormModule} from 'ng-zorro-antd/form';
 import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
 import {NzDividerComponent} from 'ng-zorro-antd/divider';
-import {PaymentComponent} from './payment/payment.component';
+
 import {NzSwitchComponent, NzSwitchModule} from 'ng-zorro-antd/switch';
-import {CustomerDetailsComponent} from './customer/customer-details/customer-details.component';
+
 import {NzTagComponent} from 'ng-zorro-antd/tag';
 import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {LoginComponent} from './login/login.component';
@@ -39,7 +39,6 @@ import {NzAvatarModule} from 'ng-zorro-antd/avatar';
 
 import {ListuserComponent} from './listuser/listuser.component';
 import {SigninComponent} from './signin/signin.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {NzStatisticComponent} from 'ng-zorro-antd/statistic';
 import {CarloadComponent} from './carload/carload.component';
 import {ManagerComponent} from './manager/manager.component';
@@ -54,14 +53,14 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    PaymentComponent,
-    CustomerComponent,
-    CustomerDetailsComponent,
+
+
+
     LoginComponent,
     MainLayoutComponent,
     SigninComponent,
     ListuserComponent,
-    DashboardComponent,
+
     CarloadComponent,
     ManagerComponent,
     SprintComponent,
