@@ -29,7 +29,7 @@ import {NzSwitchComponent, NzSwitchModule} from 'ng-zorro-antd/switch';
 
 import {NzTagComponent} from 'ng-zorro-antd/tag';
 import {AuthInterceptor} from './interceptors/auth-interceptor';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from './UASM/login/login.component';
 import {NzAlertComponent} from 'ng-zorro-antd/alert';
 import {NzCheckboxComponent} from 'ng-zorro-antd/checkbox';
 import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
@@ -37,15 +37,23 @@ import {MainLayoutComponent} from './main-layout/main-layout.component';
 import {NzModalModule} from 'ng-zorro-antd/modal';
 import {NzAvatarModule} from 'ng-zorro-antd/avatar';
 
-import {ListuserComponent} from './listuser/listuser.component';
-import {SigninComponent} from './signin/signin.component';
+import {ListuserComponent} from './UASM/listuser/listuser.component';
+import {SigninComponent} from './UASM/signin/signin.component';
 import {NzStatisticComponent} from 'ng-zorro-antd/statistic';
-import {CarloadComponent} from './carload/carload.component';
-import {ManagerComponent} from './manager/manager.component';
-import {SprintComponent} from './sprint/sprint.component';
-import {DriverComponent} from './driver/driver.component';
-import {SprintDetailsComponent} from './sprint/sprint-details/sprint-details.component';
+import {CarloadComponent} from './CLSM/carload/carload.component';
+import {ManagerComponent} from './CLSM/manager/manager.component';
+import {NzPageHeaderComponent, NzPageHeaderContentDirective} from 'ng-zorro-antd/page-header';
+import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
+import {NzDescriptionsComponent, NzDescriptionsItemComponent} from 'ng-zorro-antd/descriptions';
+import {CustomerDetailsComponent} from './CLSM/customer/customer-details/customer-details.component';
+import {CustomerComponent} from './CLSM/customer/customer.component';
+import {SprintComponent} from './CLSM/sprint/sprint.component';
+import {PaymentComponent} from './WSM/payment/payment.component';
+import {PaymentDetailsComponent} from './WSM/payment/payment-details/payment-details.component';
+import {SprintDetailsComponent} from './CLSM/sprint/sprint-details/sprint-details.component';
+import {DriverComponent} from './CLSM/driver/driver.component';
 import {NzCalendarComponent} from 'ng-zorro-antd/calendar';
+
 
 
 registerLocaleData(en);
@@ -55,7 +63,8 @@ registerLocaleData(en);
     AppComponent,
 
 
-
+CustomerDetailsComponent,
+    CustomerComponent,
     LoginComponent,
     MainLayoutComponent,
     SigninComponent,
@@ -66,6 +75,10 @@ registerLocaleData(en);
     SprintComponent,
     DriverComponent,
     SprintDetailsComponent,
+    PaymentComponent,
+    PaymentDetailsComponent,
+    CustomerDetailsComponent,
+
 
 
   ],
@@ -111,7 +124,13 @@ registerLocaleData(en);
     NzAvatarModule,
     NzSwitchModule,
     NzStatisticComponent,
-    NzCalendarComponent
+    NzCalendarComponent,
+    NzPageHeaderComponent,
+    NzSpaceComponent,
+    NzPageHeaderContentDirective,
+    NzSpaceItemDirective,
+    NzDescriptionsComponent,
+    NzDescriptionsItemComponent
 
   ],
   providers: [

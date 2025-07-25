@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, take} from 'rxjs';
 import {environment} from '../../environments/environments';
-import {Manager} from '../models/manager';
+import {Manager} from '../models/WSM/manager';
 
 @Injectable({
   providedIn: 'root'

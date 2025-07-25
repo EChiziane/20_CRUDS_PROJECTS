@@ -1,0 +1,107 @@
+/* Estilos para a página A4 */
+.a4-page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  margin: auto;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.section {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px dashed #ccc;
+}
+
+.header-section {
+  border-color: #1890ff;
+}
+
+.payment-description {
+  border-color: #52c41a;
+}
+
+.payment-months {
+  border-color: #1890ff;
+}
+
+.payment-months ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.payment-months li {
+  margin-bottom: 5px;
+}
+
+.company-info {
+  border-color: #faad14;
+}
+
+/* Ajuste de estilo para quebre de linha na descrição de meses */
+.nz-descriptions-item {
+  white-space: normal;
+}
+
+/* Estilos para impressão */
+@media print {
+  /* Remover a barra de navegação e outros elementos que não devem ser impressos */
+  body * {
+    visibility: hidden;
+  }
+
+  .a4-page, .a4-page * {
+    visibility: visible;
+  }
+
+  .a4-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    padding: 10mm;
+    background: white;
+    box-shadow: none;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    page-break-after: always;
+  }
+
+  /* Ajuste as seções para garantir que fiquem com boa aparência na impressão */
+  .section {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px dashed #ccc;
+  }
+
+  .header-section {
+    border-color: #1890ff;
+  }
+
+  .payment-description {
+    border-color: #52c41a;
+  }
+
+  .payment-months {
+    border-color: #1890ff;
+  }
+
+  .payment-months ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .payment-months li {
+    margin-bottom: 5px;
+  }
+
+  .company-info {
+    border-color: #faad14;
+  }
+}

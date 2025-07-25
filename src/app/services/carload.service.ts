@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, take} from 'rxjs';
 import {environment} from '../../environments/environments';
-import {CarLoad} from '../models/carlaod';
+import {CarLoad} from '../models/CSM/carlaod';
 
 
 @Injectable({

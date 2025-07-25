@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, take} from 'rxjs';
 import {environment} from '../../environments/environments';
-import {Sprint} from '../models/sprint';
+import {Sprint} from '../models/CSM/sprint';
 
 @Injectable({
   providedIn: 'root'

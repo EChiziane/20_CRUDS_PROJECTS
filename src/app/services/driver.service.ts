@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environments';
 import {HttpClient} from '@angular/common/http';
 import {Observable, take} from 'rxjs';
-import {Driver} from '../models/driver';
+import {Driver} from '../models/CSM/driver';
 
 @Injectable({
   providedIn: 'root'

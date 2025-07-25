@@ -12,7 +12,7 @@
       </a>
     </div>
     <ul [nzInlineCollapsed]="isCollapsed" nz-menu nzMode="inline" nzTheme="dark">
-      <li nz-submenu nzIcon="dashboard" nzOpen nzTitle="Carload">
+      <li nz-submenu nzIcon="dashboard" nzOpen nzTitle="CSM">
         <ul>
 
 
@@ -56,9 +56,6 @@
           </li>
         </ul>
       </li>
-
-
-
       <li nz-submenu nzIcon="user" nzOpen nzTitle="Account">
         <ul>
 
@@ -67,6 +64,20 @@
           </li>
         </ul>
       </li>
+
+      <li nz-submenu nzIcon="dashboard" nzOpen nzTitle="WSM">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/customer">Customer</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/payment">Payment</a>
+          </li>
+
+
+        </ul>
+      </li>
+
 
     </ul>
   </nz-sider>
