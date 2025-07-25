@@ -15,6 +15,7 @@ import {PaymentComponent} from './WSM/payment/payment.component';
 import {CustomerComponent} from './CLSM/customer/customer.component';
 import {SprintComponent} from './CLSM/sprint/sprint.component';
 import {SprintDetailsComponent} from './CLSM/sprint/sprint-details/sprint-details.component';
+import {CalendarComponent} from './calendar/calendar.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'sprint', component: SprintComponent},
   {path: 'sprint-detail/:id', component: SprintDetailsComponent},
   {path: 'driver', component: DriverComponent},
+  {path: 'calendar', component: CalendarComponent},
   {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)}
 ];
 

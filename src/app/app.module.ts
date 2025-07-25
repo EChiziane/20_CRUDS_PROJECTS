@@ -53,6 +53,12 @@ import {PaymentDetailsComponent} from './WSM/payment/payment-details/payment-det
 import {SprintDetailsComponent} from './CLSM/sprint/sprint-details/sprint-details.component';
 import {DriverComponent} from './CLSM/driver/driver.component';
 import {NzCalendarComponent} from 'ng-zorro-antd/calendar';
+import {CalendarComponent} from './calendar/calendar.component';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
+import {MatOption, MatSelect} from '@angular/material/select';
+import {MatButton} from '@angular/material/button';
 
 
 
@@ -69,7 +75,7 @@ CustomerDetailsComponent,
     MainLayoutComponent,
     SigninComponent,
     ListuserComponent,
-
+CalendarComponent,
     CarloadComponent,
     ManagerComponent,
     SprintComponent,
@@ -87,6 +93,17 @@ CustomerDetailsComponent,
     AppRoutingModule,
     IconsProviderModule,
     HttpClientModule,
+    NzLayoutModule,
+    NzDropDownModule,
+    NzMenuModule,
+    FormsModule,
+    NzInputDirective,
+    NzButtonComponent,
+    NzDividerComponent,
+    NzTableModule,
+
+
+
     NzLayoutModule,
     NzDropDownModule,
     NzMenuModule,
@@ -125,12 +142,52 @@ CustomerDetailsComponent,
     NzSwitchModule,
     NzStatisticComponent,
     NzCalendarComponent,
+
+
+    NzFilterTriggerComponent,
+    NzThAddOnComponent,
+    NzRowDirective,
+    NzColDirective,
+    NzCardComponent,
+    NzDrawerComponent,
+    NzFormDirective,
+    NzInputGroupComponent,
+    NzSelectComponent,
+    NzRangePickerComponent,
+    NzAutosizeDirective,
+    NzDrawerContentDirective,
+    NzDatePickerComponent,
+    NzButtonModule,
+    NzDrawerModule,
+    NzDatePickerModule,
+    NzFormModule,
+    NzInputModule,
+    NzSelectModule,
+    ReactiveFormsModule,
+    NzSwitchComponent,
+    NzTagComponent,
+    NzAlertComponent,
+    NzCheckboxComponent,
+    NzModalModule,
+    NzAvatarModule,
+    NzSwitchModule,
+    NzStatisticComponent,
+    NzCalendarComponent,
     NzPageHeaderComponent,
     NzSpaceComponent,
     NzPageHeaderContentDirective,
     NzSpaceItemDirective,
     NzDescriptionsComponent,
-    NzDescriptionsItemComponent
+    NzDescriptionsItemComponent,
+    MatLabel,
+    MatInput,
+    MatFormField,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatSelect,
+    MatOption,
+    MatButton
 
   ],
   providers: [
