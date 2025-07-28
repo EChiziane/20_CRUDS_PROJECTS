@@ -8,6 +8,7 @@ import {Manager} from '../../models/WSM/manager';
 import {ManagerService} from '../../services/manager.service';
 import {Sprint} from '../../models/CSM/sprint';
 import {SprintService} from '../../services/sprint.service';
+import {NzI18nService} from 'ng-zorro-antd/i18n';
 
 @Component({
   selector: 'app-carload',
@@ -30,7 +31,8 @@ export class CarloadComponent {
               private driverService: DriverService,
               private managerService: ManagerService,
               private sprintService: SprintService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private i18n: NzI18nService) {
     this.initForms();
   }
 
@@ -89,12 +91,20 @@ export class CarloadComponent {
 
   submitCarload(): void {
     if (this.carloadForm.valid) {
-      this.carloadService.addCarload(this.carloadForm.value).subscribe(() => {
+      const formValue = { ...this.carloadForm.value };
+
+      // ⚠️ Se o status não for "SCHEDULED", a data será preenchida com hoje
+      if (formValue.deliveryStatus !== 'SCHEDULED') {
+        formValue.deliveryScheduledDate = new Date(); // Hoje
+      }
+
+      this.carloadService.addCarload(formValue).subscribe(() => {
         this.loadCarloads();
         this.closeCarloadDrawer();
       });
     }
   }
+
 
   private loadData(): void {
     this.loadCarloads();
@@ -122,9 +132,31 @@ export class CarloadComponent {
       customerPhoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       totalSpent: [0, [Validators.required, Validators.min(0)]],
       totalEarnings: [0, [Validators.required, Validators.min(0)]],
-      deliveryStatus: ['', Validators.required]
+      deliveryStatus: ['', Validators.required],
+      deliveryScheduledDate:['']
     });
   }
+  date = null;
+  // ✅ Novas variáveis de controle
+  showDeliveryDateField = false;
+  showTotalEarningsField = true;
 
+
+  isEnglish = false;
+
+
+  onStatusChange(status: string): void {
+    if (status === 'SCHEDULED') {
+      this.showDeliveryDateField = true;
+      this.showTotalEarningsField = false;
+    } else {
+      this.showDeliveryDateField = false;
+      this.showTotalEarningsField = true;
+    }
+  }
+
+  onChange(result: Date): void {
+    console.log('Data de entrega selecionada:', result);
+  }
 
 }

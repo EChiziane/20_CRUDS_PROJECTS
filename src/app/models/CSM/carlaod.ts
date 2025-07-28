@@ -14,4 +14,5 @@ export interface CarLoad {
   logisticsManagerId: string;
   assignedDriverId: string;
   carloadBatchId: string;
+  deliveryScheduledDate: string;
 }

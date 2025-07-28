@@ -46,6 +46,7 @@
           <th>Gasto Total</th>
           <th>Ganhos</th>
           <th>Status</th>
+          <th>Status</th>
           <th>Ações</th>
         </tr>
 
@@ -67,6 +68,7 @@
               {{ carload.deliveryStatus }}
             </nz-tag>
           </td>
+          <td>{{carload.deliveryScheduledDate}}</td>
           <td>
             <button (click)="viewCarload(carload)" [routerLink]="['/carload-detail', carload.id]" nz-button
                     nzSize="small" nzType="link">
@@ -222,15 +224,35 @@
         <nz-form-item>
           <nz-form-label nzRequired>Status da Entrega</nz-form-label>
           <nz-form-control>
-            <nz-select formControlName="deliveryStatus" nzPlaceHolder="Selecione o status">
-              <nz-option nzLabel="Pendente" nzValue="PENDENTE"></nz-option>
-              <nz-option nzLabel="Entregue" nzValue="ENTREGUE"></nz-option>
-              <nz-option nzLabel="Cancelada" nzValue="CANCELADA"></nz-option>
+            <nz-select
+              formControlName="deliveryStatus"
+              nzPlaceHolder="Selecione o status"
+              (ngModelChange)="onStatusChange($event)">
+              <nz-option nzLabel="Entregue" nzValue="DELIVERED"></nz-option>
+              <nz-option nzLabel="Pendente" nzValue="PENDING"></nz-option>
+              <nz-option nzLabel="Agendado" nzValue="SCHEDULED"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
-    </div>
+
+
+
+      <div nz-col nzSpan="12" *ngIf="showDeliveryDateField">
+        <nz-form-item>
+          <nz-form-label nzRequired>Data de Entrega</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker
+              formControlName="deliveryScheduledDate"
+
+              (ngModelChange)="onChange($event)">
+            </nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+
+</div>
   </form>
 
   <ng-template #nzCarloadDrawerFooter>
