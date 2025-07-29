@@ -83,27 +83,38 @@ export class CarloadComponent {
   closeCarloadDrawer(): void {
     this.isCarloadDrawerVisible = false;
     this.carloadForm.reset({
-      status: 'ATIVO',
-      valve: 10,
-      monthsInDebt: 1
+      deliveryStatus: '',
+      totalSpent: 0,
+      totalEarnings: 0,
     });
+    this.currentEditingCarloadId = null;
   }
 
   submitCarload(): void {
     if (this.carloadForm.valid) {
       const formValue = { ...this.carloadForm.value };
 
-      // ⚠️ Se o status não for "SCHEDULED", a data será preenchida com hoje
       if (formValue.deliveryStatus !== 'SCHEDULED') {
         formValue.deliveryScheduledDate = new Date(); // Hoje
       }
 
-      this.carloadService.addCarload(formValue).subscribe(() => {
-        this.loadCarloads();
-        this.closeCarloadDrawer();
-      });
+      if (this.currentEditingCarloadId) {
+        // Atualizar carload existente
+        this.carloadService.updateCarload(this.currentEditingCarloadId, formValue).subscribe(() => {
+          this.loadCarloads();
+          this.closeCarloadDrawer();
+        });
+      } else {
+        // Criar novo carload
+        this.carloadService.addCarload(formValue).subscribe(() => {
+          this.loadCarloads();
+          this.closeCarloadDrawer();
+        });
+      }
     }
   }
+
+
 
 
   private loadData(): void {
@@ -158,5 +169,30 @@ export class CarloadComponent {
   onChange(result: Date): void {
     console.log('Data de entrega selecionada:', result);
   }
+
+  currentEditingCarloadId: string | null = null;
+
+  editCarload(carload: CarLoad): void {
+    this.currentEditingCarloadId = carload.id;
+
+    this.carloadForm.patchValue({
+      deliveryDestination: carload.deliveryDestination,
+      customerName: carload.customerName,
+      logisticsManagerId: carload.logisticsManagerId,
+      assignedDriverId: carload.assignedDriverId,
+      transportedMaterial: carload.transportedMaterial,
+      carloadBatchId: carload.carloadBatchId,
+      customerPhoneNumber: carload.customerPhoneNumber,
+      totalSpent: carload.totalSpent,
+      totalEarnings: carload.totalEarnings,
+      deliveryStatus: carload.deliveryStatus,
+      deliveryScheduledDate: carload.deliveryScheduledDate
+    });
+    console.log(this.carloadForm.value);
+    this.showDeliveryDateField = carload.deliveryStatus === 'SCHEDULED';
+    this.showTotalEarningsField = carload.deliveryStatus !== 'SCHEDULED';
+    this.isCarloadDrawerVisible = true;
+  }
+
 
 }
