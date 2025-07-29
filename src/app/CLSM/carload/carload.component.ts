@@ -23,11 +23,21 @@ export class CarloadComponent {
   dataDrivers: Driver[] = [];
   dataManagers: Manager[] = [];
   dataSprint: Sprint[] = [];
-  totalCarloads = 0;
+
+  allCarloads: CarLoad[] = []; // Todos os carloads
+
+  totalCarloads: number = 0;
+  isShowingScheduledOnly = false;
+  toggleButtonText = 'Mostrar Agendados';
+
+
   // Drawer controls
   isCarloadDrawerVisible = false;
   searchValue = '';
   carloadForm!: FormGroup;
+
+
+
 
   constructor(private carloadService: CarloadService,
               private driverService: DriverService,
@@ -125,12 +135,11 @@ export class CarloadComponent {
     this.getManages()
     this.getSprinters()
   }
-
+  // Carrega todos os carloads uma vez
   private loadCarloads(): void {
     this.carloadService.getCarloads().subscribe(carloads => {
-      this.listOfDisplayData = carloads;
-      this.totalCarloads = carloads.length;
-
+      this.allCarloads = carloads;
+      this.applyFilter();
     });
   }
 
@@ -216,6 +225,44 @@ export class CarloadComponent {
     });
   }
 
+  toggleCarloads(): void {
+    this.isShowingScheduledOnly = !this.isShowingScheduledOnly;
+    this.toggleButtonText = this.isShowingScheduledOnly ? 'Mostrar Todos' : 'Mostrar Agendados';
+    this.applyFilter();
+  }
 
+  // Aplica o filtro de acordo com a flag isShowingScheduledOnly
+  private applyFilter(): void {
+    if (this.isShowingScheduledOnly) {
+      this.listOfDisplayData = this.allCarloads.filter(cl => cl.deliveryStatus === 'SCHEDULED');
+    } else {
+      this.listOfDisplayData = [...this.allCarloads];
+    }
+    this.totalCarloads = this.listOfDisplayData.length;
+  }
+
+
+  encerarCarload(carload: CarLoad): void {
+    this.modal.confirm({
+      nzTitle: 'Tens certeza que desejas encerrar este Carregamento?',
+      nzContent: `Cliente: <strong>${carload.customerName}</strong><br>Destino: <strong>${carload.deliveryDestination}</strong>`,
+      nzOkText: 'Sim, encerrar',
+      nzOkType: 'primary',
+      nzCancelText: 'Cancelar',
+      nzOnOk: () => {
+        const updatedCarload = { ...carload, deliveryStatus: 'DELIVERED' }; // ou outro status final
+
+        this.carloadService.encerarCarload(carload.id, updatedCarload).subscribe({
+          next: () => {
+            this.message.success('Carregamento encerrado com sucesso ✅');
+            this.loadCarloads(); // Atualiza a lista
+          },
+          error: () => {
+            this.message.error('Erro ao encerrar o carregamento ❌');
+          }
+        });
+      }
+    });
+  }
 
 }

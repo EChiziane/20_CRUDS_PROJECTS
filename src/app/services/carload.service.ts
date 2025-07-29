@@ -19,9 +19,18 @@ export class CarloadService {
     return this.http.get<CarLoad[]>(this.baseURL);
   }
 
+  public getScheduledCarloads(): Observable<CarLoad[]> {
+    return this.http.get<CarLoad[]>(`${this.baseURL}/scheduled`);
+  }
+
   public getCarloadsBySprint(id: any): Observable<CarLoad[]> {
     return this.http.get<CarLoad[]>(`${this.baseURL}/sprint/${id}`);
   }
+
+  public encerarCarload(id: any, carload: CarLoad): Observable<CarLoad> {
+    return this.http.put<CarLoad>(`${this.baseURL}/${id}`, carload).pipe(take(1));
+  }
+
 
   public getCarloadById(id: number): Observable<CarLoad> {
     return this.http.get<CarLoad>(`${this.baseURL}/${id}`);
@@ -36,6 +45,8 @@ export class CarloadService {
   }
 
   public updateCarload(id: string,carload:CarLoad): Observable<CarLoad> {
-    return this.http.put<CarLoad>(`/${this.baseURL}/${id}`,carload).pipe(take(1));
+    return this.http.put<CarLoad>(`${this.baseURL}/${id}`,carload).pipe(take(1));
   }
+
+
 }

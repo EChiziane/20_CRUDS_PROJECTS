@@ -2,7 +2,7 @@
   <div class="header">
     <p>Lista de Carloads</p>
   </div>
-  <div class="dash">
+  <div *ngIf="isShowingScheduledOnly" class="dash">
 
     <div style="background: #ECECEC;">
       <div [nzGutter]="8" nz-row>
@@ -26,27 +26,30 @@
 
   </div>
   <div class="filter">
-
     <input (ngModelChange)="search()" [(ngModel)]="searchValue" nz-input placeholder="Search..." type="text"/>
     <button (click)="openCarloadDrawer()" nz-button nzType="primary">Novo Carload</button>
+    <button (click)="toggleCarloads()" nz-button nzType="default">
+      {{ toggleButtonText }}
+    </button>
+
   </div>
   <div class="table-container">
 
     <div class="table-scroll">
-      <nz-table #nzTable [nzData]="listOfDisplayData" [nzScroll]="{ x: '1150px', y: 'auto' }" nzTableLayout="fixed">
+      <nz-table #nzTable [nzData]="listOfDisplayData" [nzScroll]="{ x: '1050px', y: '280' }" nzTableLayout="fixed">
         <thead>
         <tr>
           <th>Destino</th>
           <th>Cliente</th>
           <th>Telefone</th>
-          <th>Gerente</th>
-          <th>Motorista</th>
+
+          <th *ngIf="!isShowingScheduledOnly">Motorista</th>
           <th>Material</th>
-          <th>Lote</th>
-          <th>Gasto Total</th>
+          <th *ngIf="!isShowingScheduledOnly">Lote</th>
+          <th *ngIf="!isShowingScheduledOnly">Gasto Total</th>
           <th>Ganhos</th>
           <th>Status</th>
-          <th>Status</th>
+          <th *ngIf="isShowingScheduledOnly">Entrega</th>
           <th>Ações</th>
         </tr>
 
@@ -56,23 +59,23 @@
           <td>{{ carload.deliveryDestination }}</td>
           <td>{{ carload.customerName }}</td>
           <td>{{ carload.customerPhoneNumber }}</td>
-          <td>{{ carload.logisticsManagerName }}</td>
-          <td>{{ carload.assignedDriverName }}</td>
-          <td>{{ carload.transportedMaterial }}</td>
-          <td>{{ carload.carloadBatchName }}</td>
-          <td>{{ carload.totalSpent | currency:'MZN':'symbol':'1.2-2' }}</td>
-          <td>{{ carload.totalEarnings | currency:'MZN':'symbol':'1.2-2' }}</td>
 
+          <td *ngIf="!isShowingScheduledOnly">{{ carload.assignedDriverName }}</td>
+          <td>{{ carload.transportedMaterial }}</td>
+          <td *ngIf="!isShowingScheduledOnly">{{ carload.carloadBatchName }}</td>
+          <td *ngIf="!isShowingScheduledOnly">{{ carload.totalSpent | currency:'MZN':'symbol':'1.2-2' }}</td>
+          <td>{{ carload.totalEarnings | currency:'MZN':'symbol':'1.2-2' }}</td>
           <td>
             <nz-tag [nzColor]="carload.deliveryStatus === 'Entregue' ? 'green' : 'orange'">
               {{ carload.deliveryStatus }}
             </nz-tag>
           </td>
-          <td>{{carload.deliveryScheduledDate}}</td>
+          <td *ngIf="isShowingScheduledOnly">{{ carload.deliveryScheduledDate | date: 'dd/MM/yyyy' }}</td>
           <td>
-            <button (click)="viewCarload(carload)" [routerLink]="['/carload-detail', carload.id]" nz-button
+            <button (click)="encerarCarload(carload)"  nz-button
                     nzSize="small" nzType="link">
-              <nz-icon nzTheme="outline" nzType="eye"></nz-icon>
+
+              <nz-icon nzType="copyright-circle" nzTheme="outline" />
             </button>
             <button (click)="editCarload(carload)" nz-button nzSize="small" nzType="link">
               <nz-icon nzTheme="outline" nzType="edit"></nz-icon>
