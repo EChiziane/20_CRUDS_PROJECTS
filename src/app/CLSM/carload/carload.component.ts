@@ -9,6 +9,8 @@ import {ManagerService} from '../../services/manager.service';
 import {Sprint} from '../../models/CSM/sprint';
 import {SprintService} from '../../services/sprint.service';
 import {NzI18nService} from 'ng-zorro-antd/i18n';
+import {NzModalService} from 'ng-zorro-antd/modal';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-carload',
@@ -32,7 +34,9 @@ export class CarloadComponent {
               private managerService: ManagerService,
               private sprintService: SprintService,
               private fb: FormBuilder,
-              private i18n: NzI18nService) {
+              private i18n: NzI18nService,
+              private modal: NzModalService,
+              private message: NzMessageService) {
     this.initForms();
   }
 
@@ -76,9 +80,7 @@ export class CarloadComponent {
     // lógica para imprimir
   }
 
-  deleteCarload(carload: CarLoad) {
-    // lógica para excluir
-  }
+
 
   closeCarloadDrawer(): void {
     this.isCarloadDrawerVisible = false;
@@ -188,11 +190,32 @@ export class CarloadComponent {
       deliveryStatus: carload.deliveryStatus,
       deliveryScheduledDate: carload.deliveryScheduledDate
     });
-    console.log(this.carloadForm.value);
     this.showDeliveryDateField = carload.deliveryStatus === 'SCHEDULED';
     this.showTotalEarningsField = carload.deliveryStatus !== 'SCHEDULED';
     this.isCarloadDrawerVisible = true;
   }
+
+  deleteCarload(carload: CarLoad): void {
+    this.modal.confirm({
+      nzTitle: 'Tens certeza que quer eliminar o Carregamento?',
+      nzContent: `Destino: <strong>${carload.deliveryDestination}</strong>`,
+      nzOkText: 'Sim',
+      nzOkType: 'primary',
+      nzCancelText: 'Não',
+      nzOnOk: () =>
+        this.carloadService.deleteCarload(carload.id).subscribe({
+          next: () => {
+
+            this.loadCarloads();
+            this.message.success('Carregamento eliminado com sucesso! 🗑️');
+          },
+          error: () => {
+            this.message.error('Erro ao eliminar carregamento. 🚫');
+          }
+        })
+    });
+  }
+
 
 
 }
