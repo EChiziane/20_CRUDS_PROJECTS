@@ -185,7 +185,6 @@ export class CarloadComponent {
 
   editCarload(carload: CarLoad): void {
     this.currentEditingCarloadId = carload.id;
-
     this.carloadForm.patchValue({
       deliveryDestination: carload.deliveryDestination,
       customerName: carload.customerName,

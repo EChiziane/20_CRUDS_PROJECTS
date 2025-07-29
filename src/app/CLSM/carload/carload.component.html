@@ -72,7 +72,7 @@
           </td>
           <td *ngIf="isShowingScheduledOnly">{{ carload.deliveryScheduledDate | date: 'dd/MM/yyyy' }}</td>
           <td>
-            <button (click)="encerarCarload(carload)"  nz-button
+            <button *ngIf="isShowingScheduledOnly" (click)="encerarCarload(carload)"  nz-button
                     nzSize="small" nzType="link">
 
               <nz-icon nzType="copyright-circle" nzTheme="outline" />
