@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {Student} from '../models/CSM/students';
+import {Student} from '../models/EISSM/students';
 import {StudentService} from '../services/student.service';
 
 

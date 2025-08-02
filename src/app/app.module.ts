@@ -60,6 +60,7 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/m
 import {MatOption, MatSelect} from '@angular/material/select';
 import {MatButton} from '@angular/material/button';
 import {StudentComponent} from './students/students.component';
+import {TeacherComponent} from './teacher/teacher.component';
 
 
 
@@ -85,7 +86,8 @@ CalendarComponent,
     PaymentComponent,
     PaymentDetailsComponent,
     CustomerDetailsComponent,
-    StudentComponent
+    StudentComponent,
+    TeacherComponent
 
 
 

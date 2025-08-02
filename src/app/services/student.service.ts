@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environments';
 import { Observable, take } from 'rxjs';
-import {Student} from '../models/CSM/students';
+import {Student} from '../models/EISSM/students';
 
 
 @Injectable({
