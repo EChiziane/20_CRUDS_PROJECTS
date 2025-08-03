@@ -18,6 +18,7 @@ import {SprintDetailsComponent} from './CLSM/sprint/sprint-details/sprint-detail
 import {CalendarComponent} from './calendar/calendar.component';
 import {StudentComponent} from './students/students.component';
 import {TeacherComponent} from './teacher/teacher.component';
+import {ClassroomComponent} from './classroom/classroom.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'calendar', component: CalendarComponent},
   {path: 'student', component: StudentComponent},
   {path: 'teacher', component:TeacherComponent},
+  {path: 'classroom', component:ClassroomComponent},
   {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)}
 ];
 
