@@ -18,6 +18,9 @@ export class StudentService {
     return this.http.get<Student[]>(this.baseURL);
   }
 
+  printStudentInvoice(id: string):Observable<Student> {
+return this.http.get<Student>(`${this.baseURL}/recibo/${id}` );
+  }
   getStudentById(id: string): Observable<Student> {
     return this.http.get<Student>(`${this.baseURL}/${id}`);
   }
@@ -33,4 +36,6 @@ export class StudentService {
   deleteStudent(id: string): Observable<any> {
     return this.http.delete(`${this.baseURL}/${id}`).pipe(take(1));
   }
+
+
 }

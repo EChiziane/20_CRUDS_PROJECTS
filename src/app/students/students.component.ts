@@ -121,6 +121,11 @@ export class StudentComponent implements OnInit {
     });
   }
 
+
+  printStudent(student: Student):void {
+this.studentService.printStudentInvoice(student.id).subscribe({})
+  }
+
   private initForm(): void {
     this.studentForm = this.fb.group({
       nome: ['', Validators.required],
@@ -144,4 +149,5 @@ export class StudentComponent implements OnInit {
       student.numeroEstudante.toLowerCase().includes(val)
     );
   }
+
 }

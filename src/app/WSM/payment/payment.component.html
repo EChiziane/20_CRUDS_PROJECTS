@@ -4,7 +4,7 @@
   </div>
 
   <div class="dash">
-    <div style="background: #ECECEC; padding:30px;">
+    <div style="background: #ECECEC;">
       <div [nzGutter]="8" nz-row>
         <div [nzSpan]="8" nz-col>
           <nz-card nzTitle="Total Payments">
@@ -93,12 +93,14 @@
         <nz-form-item>
           <nz-form-label>Payment Method</nz-form-label>
           <nz-form-control>
-            <nz-select formControlName="paymentMethod" nzPlaceHolder="Select payment method">
-              <nz-option nzLabel="Credit" nzValue="Credit"></nz-option>
-              <nz-option nzLabel="Cash" nzValue="Cash"></nz-option>
-              <nz-option nzLabel="Bank Transfer" nzValue="Bank Transfer"></nz-option>
+            <nz-select formControlName="paymentMethod" nzPlaceHolder="Selecione o método de pagamento">
+              <nz-option nzLabel="EMOLA" nzValue="EMOLA"></nz-option>
+              <nz-option nzLabel="MPESA" nzValue="MPESA"></nz-option>
+              <nz-option nzLabel="BCI" nzValue="BCI"></nz-option>
+              <nz-option nzLabel="NUMERARIO" nzValue="NUMERARIO"></nz-option>
             </nz-select>
           </nz-form-control>
+
         </nz-form-item>
       </div>
     </div>

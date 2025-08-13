@@ -4,6 +4,7 @@ import {Payment} from '../../models/WSM/payment';
 import {CustomerService} from '../../services/customer.service';
 import {PaymentService} from '../../services/payment.service';
 import {Customer} from '../../models/CSM/customer';
+import {Student} from '../../models/EISSM/students';
 
 
 @Component({
@@ -87,11 +88,12 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  printPayment(data: Payment) {
-    this.paymentService.getPaymentInvoice(data.id).subscribe((payment: Payment) => {
-      console.log(data.id);
-    });
+
+
+  printPayment(payment: Payment):void {
+    this.paymentService.printInvoice(payment.id).subscribe({})
   }
+
 
   public createPayment() {
     if (this.paymentForm.invalid) {
