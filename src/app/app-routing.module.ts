@@ -19,6 +19,7 @@ import {CalendarComponent} from './calendar/calendar.component';
 import {StudentComponent} from './students/students.component';
 import {TeacherComponent} from './teacher/teacher.component';
 import {ClassroomComponent} from './classroom/classroom.component';
+import {ReciboComponent} from './recibo/recibo.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: 'student', component: StudentComponent},
   {path: 'teacher', component:TeacherComponent},
   {path: 'classroom', component:ClassroomComponent},
+  {path: 'recibo', component:ReciboComponent},
   {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)}
 ];
 

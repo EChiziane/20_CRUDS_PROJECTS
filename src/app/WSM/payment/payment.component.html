@@ -55,6 +55,7 @@
         <td>{{ data.confirmed ? 'Yes' : 'No' }}</td>
         <td>{{ data.paymentDate | date: 'dd MM yyyy - HH:mm' }}</td>
         <td>
+
           <button (click)="viewPayment(data)" [routerLink]="['/payment-detail', data.id]" nz-button nzSize="small" nzType="link">
             <nz-icon nzTheme="outline" nzType="eye"></nz-icon>
           </button>

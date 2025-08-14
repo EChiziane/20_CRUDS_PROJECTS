@@ -62,6 +62,7 @@ import {MatButton} from '@angular/material/button';
 import {StudentComponent} from './students/students.component';
 import {TeacherComponent} from './teacher/teacher.component';
 import {ClassroomComponent} from './classroom/classroom.component';
+import {ReciboComponent} from './recibo/recibo.component';
 
 
 
@@ -89,8 +90,8 @@ CalendarComponent,
     CustomerDetailsComponent,
     StudentComponent,
     TeacherComponent,
-    ClassroomComponent
-
+    ClassroomComponent,
+ReciboComponent
 
 
   ],
