@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import {Recibo} from '../models/CSM/Recibo';
-import {ReciboService} from '../services/recibo.service';
-
+import { Recibo } from '../models/WSM/Recibo';
+import { ReciboService } from '../services/recibo.service';
+import { Payment } from '../models/WSM/payment';
+import { PaymentService } from '../services/payment.service';
 
 @Component({
   selector: 'app-recibo',
@@ -17,6 +17,7 @@ import {ReciboService} from '../services/recibo.service';
 })
 export class ReciboComponent implements OnInit {
   dataSource: Recibo[] = [];
+  payments: Payment[] = [];
   listOfDisplayData: Recibo[] = [];
 
   searchValue = '';
@@ -28,27 +29,32 @@ export class ReciboComponent implements OnInit {
   selectedReciboId: string | null = null;
 
   reciboForm = new FormGroup({
-    nomeCliente: new FormControl('', Validators.required),
-    fileName: new FormControl('', Validators.required),
-    filePath: new FormControl('', Validators.required),
-    createdAt: new FormControl('', Validators.required)
+    paymentId: new FormControl('', Validators.required),
   });
 
   constructor(
     private http: HttpClient,
     private reciboService: ReciboService,
+    private paymentService: PaymentService,
     private message: NzMessageService,
     private modal: NzModalService
   ) {}
 
   ngOnInit(): void {
     this.getRecibos();
+    this.getPayments();
   }
 
   getRecibos() {
     this.reciboService.getRecibos().subscribe((recibos: Recibo[]) => {
       this.dataSource = recibos;
       this.listOfDisplayData = [...this.dataSource];
+    });
+  }
+
+  getPayments() {
+    this.paymentService.getPayments().subscribe((payments: Payment[]) => {
+      this.payments = payments;
     });
   }
 
@@ -70,6 +76,7 @@ export class ReciboComponent implements OnInit {
     this.isEditMode = false;
     this.drawerTitle = 'Criar Recibo';
     this.reciboForm.reset();
+    this.getPayments();
     this.visibleDrawer = true;
   }
 
@@ -97,7 +104,7 @@ export class ReciboComponent implements OnInit {
         }
       });
     } else {
-      this.reciboService.addRecibo(this.reciboForm.value as Recibo).subscribe({
+      this.reciboService.addRecibo(this.reciboForm.value).subscribe({
         next: (newRecibo) => {
           this.dataSource = [...this.dataSource, newRecibo];
           this.listOfDisplayData = [...this.dataSource];
@@ -116,13 +123,11 @@ export class ReciboComponent implements OnInit {
     this.isEditMode = true;
     this.drawerTitle = 'Editar Recibo';
     this.selectedReciboId = recibo.id;
+    this.getPayments();
     this.visibleDrawer = true;
 
     this.reciboForm.patchValue({
-      nomeCliente: recibo.nomeCliente,
-      fileName: recibo.fileName,
-      filePath: recibo.filePath,
-      createdAt: recibo.createdAt
+      paymentId: recibo.paymentId,
     });
   }
 
@@ -150,4 +155,18 @@ export class ReciboComponent implements OnInit {
       }
     });
   }
+
+  getDownloadUrl(recibo: Recibo) {
+    this.reciboService.downloadRecibo(recibo.id).subscribe((fileBlob: Blob) => {
+      const url = window.URL.createObjectURL(fileBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = recibo.fileName; // ou qualquer nome
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+
+
 }

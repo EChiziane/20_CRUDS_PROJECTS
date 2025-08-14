@@ -3,10 +3,12 @@
     <p>Lista de Recibos</p>
   </div>
 
-<!--  <div class="filter">
+  <div class="filter">
     <input [(ngModel)]="searchValue" (ngModelChange)="search()" nz-input placeholder="Pesquisar recibo ou cliente" type="text" />
-    <button (click)="open()" nz-button nzType="primary">Adicionar Recibo</button>
-  </div>-->
+    <button (click)="open()" nz-button nzType="primary" [disabled]="payments.length === 0">
+      Adicionar Recibo
+    </button>
+  </div>
 
   <div class="table">
     <nz-table #nzTable [nzData]="listOfDisplayData" [nzScroll]="{ x: '1150px', y: '340px' }" nzTableLayout="fixed">
@@ -14,9 +16,9 @@
       <tr>
         <th nzCustomFilter>
           Nome do Cliente
-  <!--        <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+          <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
             <nz-icon nzType="search"></nz-icon>
-          </nz-filter-trigger>-->
+          </nz-filter-trigger>
         </th>
         <th>Nome do Ficheiro</th>
         <th>Caminho do Ficheiro</th>
@@ -27,8 +29,16 @@
       <tbody>
       <tr *ngFor="let data of nzTable.data">
         <td>{{ data.nomeCliente }}</td>
-        <td>{{ data.fileName }}</td>
-        <td>{{ data.filePath }}</td>
+        <td>
+            {{ data.fileName }}
+        </td>
+
+        <td>
+          <a target="_blank"
+             (click)="getDownloadUrl(data)" >
+            {{ data.filePath }}
+          </a>
+        </td>
         <td>{{ data.createdAt | date: 'dd/MM/yyyy - HH:mm' }}</td>
         <td>
           <button nz-button nzType="link" nzSize="small" (click)="viewRecibo(data)">
@@ -44,7 +54,7 @@
       </tr>
       </tbody>
     </nz-table>
-<!--
+
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <div class="ant-table-filter-dropdown">
         <div class="search-box">
@@ -53,57 +63,32 @@
           <button (click)="reset()" nz-button nzSize="small">Limpar</button>
         </div>
       </div>
-    </nz-dropdown-menu>-->
+    </nz-dropdown-menu>
   </div>
 </div>
 
-<!-- Drawer para criar/editar recibo -->
-<!--<nz-drawer
+<!-- Drawer -->
+<nz-drawer
   (nzOnClose)="close()"
   [nzBodyStyle]="{ overflow: 'auto' }"
   [nzFooter]="footerTpl"
   [nzMaskClosable]="false"
   [nzVisible]="visibleDrawer"
-  [nzWidth]="720"
+  [nzWidth]="480"
   [nzTitle]="drawerTitle"
 >
   <form (ngSubmit)="createRecibo()" *nzDrawerContent [formGroup]="reciboForm" nz-form>
-    <div [nzGutter]="16" nz-row>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Nome do Cliente</nz-form-label>
-          <nz-form-control>
-            <input formControlName="nomeCliente" nz-input placeholder="Digite o nome do cliente" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Nome do Ficheiro</nz-form-label>
-          <nz-form-control>
-            <input formControlName="fileName" nz-input placeholder="Digite o nome do ficheiro" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-
-    <div [nzGutter]="16" nz-row>
+    <div nz-row [nzGutter]="16">
       <div nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-label>Caminho do Ficheiro</nz-form-label>
+          <nz-form-label>Pagamento</nz-form-label>
           <nz-form-control>
-            <input formControlName="filePath" nz-input placeholder="Digite o caminho do ficheiro" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-
-    <div [nzGutter]="16" nz-row>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Data de Criação</nz-form-label>
-          <nz-form-control>
-            <input formControlName="createdAt" nz-input type="datetime-local" />
+            <nz-select formControlName="paymentId" nzPlaceHolder="Selecione um pagamento">
+              <nz-option *ngFor="let payment of payments"
+                         [nzLabel]="'Pagamento ' + payment.id"
+                         [nzValue]="payment.id">
+              </nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -113,9 +98,7 @@
   <ng-template #footerTpl>
     <div style="float: right">
       <button (click)="close()" nz-button style="margin-right: 8px;">Cancelar</button>
-      <button (click)="createRecibo()" nz-button nzType="primary">
-        {{ isEditMode ? 'Salvar' : 'Criar' }}
-      </button>
+      <button (click)="createRecibo()" type="submit" nz-button nzType="primary" [disabled]="reciboForm.invalid">Salvar</button>
     </div>
   </ng-template>
-</nz-drawer>-->
+</nz-drawer>
