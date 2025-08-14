@@ -24,7 +24,8 @@ export class PaymentComponent implements OnInit {
 
   searchValue = '';
   visible = false;
-  visible1 = false; // Controla a visibilidade do modal
+  visible1 = false;
+  visible1CustomerDrawer=false;// Controla a visibilidade do modal
 
   paymentForm = new FormGroup({
     amount: new FormControl('', [Validators.required, Validators.min(0)]),
@@ -78,8 +79,16 @@ export class PaymentComponent implements OnInit {
     this.visible1 = true;
   }
 
+  openCustomerDrawer(): void {
+    this.visible1CustomerDrawer = true;
+  }
+
   close(): void {
     this.visible1 = false;
+  }
+
+  closeCustomerDrawer(): void {
+    this.visible1CustomerDrawer = false;
   }
 
   getCustomers() {
@@ -93,6 +102,25 @@ export class PaymentComponent implements OnInit {
   printPayment(payment: Payment):void {
     this.paymentService.printInvoice(payment.id).subscribe({})
   }
+  createCustomer() {
+    if (this.customerForm.invalid) {
+      console.error('Formulário inválido.');
+      return;
+    }
+
+
+      this.customerService.addCustomer(this.customerForm.value).subscribe({
+        next: (newCustomer) => {
+          console.log('Cliente criado com sucesso:', newCustomer);
+          this.listOfDisplayData = [...this.dataSource];
+          this.customerForm.reset({ status: 'ATIVO', valve: 10, monthsInDebt: 1 });
+          this.close();
+        },
+        error: (err) => {
+          console.error('Erro ao adicionar cliente:', err);
+        }
+      });
+    }
 
 
   public createPayment() {
@@ -123,6 +151,17 @@ export class PaymentComponent implements OnInit {
   editPayment(data: Payment) {}
 
   viewPayment(data: Payment) {}
+
+
+
+  customerForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    contact: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+    address: new FormControl('', Validators.required),
+    status: new FormControl('ATIVO', Validators.required),
+    valve: new FormControl(10, [Validators.required, Validators.min(0)]),
+    monthsInDebt: new FormControl(1, [Validators.required, Validators.min(0)])
+  });
 }
 
 
