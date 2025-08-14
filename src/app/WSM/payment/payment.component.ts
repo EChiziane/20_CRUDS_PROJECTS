@@ -5,6 +5,10 @@ import {CustomerService} from '../../services/customer.service';
 import {PaymentService} from '../../services/payment.service';
 import {Customer} from '../../models/CSM/customer';
 import {Student} from '../../models/EISSM/students';
+import {Recibo} from '../../models/WSM/Recibo';
+import {ReciboService} from '../../services/recibo.service';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 
 @Component({
@@ -37,7 +41,10 @@ export class PaymentComponent implements OnInit {
 
   constructor(
     private paymentService: PaymentService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private reciboService: ReciboService,
+    private message: NzMessageService,
+    private modal: NzModalService
   ) {}
 
   ngOnInit(): void {
@@ -102,6 +109,19 @@ export class PaymentComponent implements OnInit {
   printPayment(payment: Payment):void {
     this.paymentService.printInvoice(payment.id).subscribe({})
   }
+
+  getDownloadUrl(recibo: Recibo) {
+    this.reciboService.downloadRecibo(recibo.id).subscribe((fileBlob: Blob) => {
+      const url = window.URL.createObjectURL(fileBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = recibo.fileName; // ou qualquer nome
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+
   createCustomer() {
     if (this.customerForm.invalid) {
       console.error('Formulário inválido.');
@@ -121,6 +141,22 @@ export class PaymentComponent implements OnInit {
         }
       });
     }
+
+
+  createRecibo(payment:Payment) {
+
+     {
+      this.reciboService.addRecibo(payment.id).subscribe({
+        next: (newRecibo) => {
+          this.message.success('Recibo criado com sucesso! ✅');
+        },
+        error: () => {
+          this.message.error('Erro ao criar recibo. 🚫');
+        }
+      });
+    }
+  }
+
 
 
   public createPayment() {

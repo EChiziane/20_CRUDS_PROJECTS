@@ -28,15 +28,21 @@ export class ReciboService {
     });
   }
 
+  public getRecibosByPayments(id:any): Observable<Recibo[]> {
+    return this.http.get<Recibo[]>(`${this.baseURL}/${id}`);
+  }
+
 
   public getReciboById(id: string): Observable<Recibo> {
     return this.http.get<Recibo>(`${this.baseURL}/${id}`);
   }
 
-  public addRecibo(payment: any): Observable<Recibo> {
-    console.log(payment, "create");
-    return this.http.post<Recibo>(`${this.baseURL}`,payment).pipe(take(1));
+  public addRecibo(paymentId: string): Observable<Recibo> {
+    const body = { paymentId: paymentId }; // cria o objeto com a chave correta
+    console.log(body, "create");
+    return this.http.post<Recibo>(`${this.baseURL}`, body).pipe(take(1));
   }
+
 
   public deleteRecibo(id: string): Observable<Recibo> {
     return this.http.delete<Recibo>(`${this.baseURL}/${id}`);

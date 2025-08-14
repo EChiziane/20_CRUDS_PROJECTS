@@ -67,7 +67,7 @@ export class ReciboComponent implements OnInit {
     this.visible = false;
     this.listOfDisplayData = this.dataSource.filter(
       (item: Recibo) =>
-        item.nomeCliente.toLowerCase().includes(this.searchValue.toLowerCase()) ||
+        item.customerName.toLowerCase().includes(this.searchValue.toLowerCase()) ||
         item.fileName.toLowerCase().includes(this.searchValue.toLowerCase())
     );
   }
@@ -104,7 +104,7 @@ export class ReciboComponent implements OnInit {
         }
       });
     } else {
-      this.reciboService.addRecibo(this.reciboForm.value).subscribe({
+      this.reciboService.addRecibo(this.reciboForm.value.paymentId!).subscribe({
         next: (newRecibo) => {
           this.dataSource = [...this.dataSource, newRecibo];
           this.listOfDisplayData = [...this.dataSource];

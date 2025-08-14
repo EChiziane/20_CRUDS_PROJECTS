@@ -1,6 +1,6 @@
 export interface Recibo {
   id: string;
-  nomeCliente: string;
+  customerName: string;
   paymentId: string;
   fileName: string;
   filePath: string;
