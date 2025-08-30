@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Vehicle} from '../models/Vehicle';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
@@ -29,29 +29,12 @@ export class VehicleComponent {
     this.initForm();
   }
 
-  ngOnInit(): void {
-    this.loadVehicles();
-  }
-
   get drawerTitle(): string {
     return this.currentEditingVehicleId ? 'Editar Veículo' : 'Adicionar Veículo';
   }
 
-  private initForm(): void {
-    this.vehicleForm = this.fb.group({
-      model: ['', Validators.required],
-      brand: ['', Validators.required],
-      year: [null, Validators.required],
-      licensePlate: ['', Validators.required],
-      mileage: [0, Validators.required]
-    });
-  }
-
-  private loadVehicles(): void {
-    this.vehicleService.getVehicles().subscribe({
-      next: data => this.vehicles = data,
-      error: () => this.message.error('Erro ao carregar veículos')
-    });
+  ngOnInit(): void {
+    this.loadVehicles();
   }
 
   openDrawer(): void {
@@ -123,6 +106,23 @@ export class VehicleComponent {
       v.brand.toLowerCase().includes(value) ||
       v.licensePlate.toLowerCase().includes(value)
     );
+  }
+
+  private initForm(): void {
+    this.vehicleForm = this.fb.group({
+      model: ['', Validators.required],
+      brand: ['', Validators.required],
+      year: [null, Validators.required],
+      licensePlate: ['', Validators.required],
+      mileage: [0, Validators.required]
+    });
+  }
+
+  private loadVehicles(): void {
+    this.vehicleService.getVehicles().subscribe({
+      next: data => this.vehicles = data,
+      error: () => this.message.error('Erro ao carregar veículos')
+    });
   }
 
 }

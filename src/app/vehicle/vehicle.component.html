@@ -1,1 +1,95 @@
-<p>vehicle works!</p>
+<div class="main-content">
+
+  <div class="header">
+    <h3>Lista de Veículos</h3>
+  </div>
+
+  <div class="filter">
+    <input (ngModelChange)="search()" [(ngModel)]="searchValue" nz-input placeholder="Pesquisar veículo..."/>
+    <button (click)="openDrawer()" nz-button nzType="primary">Novo Veículo</button>
+  </div>
+
+  <div class="table-container">
+    <nz-table [nzBordered]="true" [nzData]="vehicles">
+      <thead>
+      <tr>
+        <th>Modelo</th>
+        <th>Marca</th>
+        <th>Ano</th>
+        <th>Placa</th>
+        <th>Quilometragem</th>
+        <th>Criado em</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of vehicles">
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.brand }}</td>
+        <td>{{ vehicle.year }}</td>
+        <td>{{ vehicle.licensePlate }}</td>
+        <td>{{ vehicle.mileage }}</td>
+        <td>{{ vehicle.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <button (click)="editVehicle(vehicle)" nz-button nzType="link">
+            <nz-icon nzType="edit"></nz-icon>
+          </button>
+          <button (click)="deleteVehicle(vehicle)" nz-button nzDanger nzType="link">
+            <nz-icon nzType="delete"></nz-icon>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+<nz-drawer
+  (nzOnClose)="closeDrawer()"
+  [nzFooter]="drawerFooter"
+  [nzTitle]="drawerTitle"
+  [nzVisible]="isDrawerVisible"
+  [nzWidth]="480">
+
+  <form *nzDrawerContent [formGroup]="vehicleForm" nz-form>
+    <nz-form-item>
+      <nz-form-label nzRequired>Modelo</nz-form-label>
+      <nz-form-control>
+        <input formControlName="model" nz-input placeholder="Modelo do veículo"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Marca</nz-form-label>
+      <nz-form-control>
+        <input formControlName="brand" nz-input placeholder="Marca do veículo"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Ano</nz-form-label>
+      <nz-form-control>
+        <input formControlName="year" nz-input placeholder="Ano de fabrico" type="number"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Placa</nz-form-label>
+      <nz-form-control>
+        <input formControlName="licensePlate" nz-input placeholder="Placa do veículo"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Quilometragem</nz-form-label>
+      <nz-form-control>
+        <input formControlName="mileage" nz-input placeholder="Km rodados" type="number"/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+  <ng-template #drawerFooter>
+    <button (click)="closeDrawer()" nz-button>Cancelar</button>
+    <button (click)="submitVehicle()" [disabled]="!vehicleForm.valid" nz-button nzType="primary">Salvar</button>
+  </ng-template>
+</nz-drawer>

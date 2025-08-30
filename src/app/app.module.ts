@@ -40,32 +40,21 @@ import {NzAvatarModule} from 'ng-zorro-antd/avatar';
 import {ListuserComponent} from './UASM/listuser/listuser.component';
 import {SigninComponent} from './UASM/signin/signin.component';
 import {NzStatisticComponent} from 'ng-zorro-antd/statistic';
-import {CarloadComponent} from './CLSM/carload/carload.component';
-import {ManagerComponent} from './CLSM/manager/manager.component';
+
 import {NzPageHeaderComponent, NzPageHeaderContentDirective} from 'ng-zorro-antd/page-header';
 import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
 import {NzDescriptionsComponent, NzDescriptionsItemComponent} from 'ng-zorro-antd/descriptions';
-import {CustomerDetailsComponent} from './CLSM/customer/customer-details/customer-details.component';
-import {CustomerComponent} from './CLSM/customer/customer.component';
-import {SprintComponent} from './CLSM/sprint/sprint.component';
-import {PaymentComponent} from './WSM/payment/payment.component';
-import {PaymentDetailsComponent} from './WSM/payment/payment-details/payment-details.component';
-import {SprintDetailsComponent} from './CLSM/sprint/sprint-details/sprint-details.component';
-import {DriverComponent} from './CLSM/driver/driver.component';
+
 import {NzCalendarComponent} from 'ng-zorro-antd/calendar';
-import {CalendarComponent} from './calendar/calendar.component';
+
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {MatButton} from '@angular/material/button';
-import {StudentComponent} from './students/students.component';
-import {TeacherComponent} from './teacher/teacher.component';
-import {ClassroomComponent} from './classroom/classroom.component';
-import {ReciboComponent} from './recibo/recibo.component';
-import {ProjetoComponent} from './projeto/projeto.component';
-import {VehicleComponent} from './vehicle/vehicle.component';
 
+
+import {VehicleComponent} from './vehicle/vehicle.component';
 
 
 registerLocaleData(en);
@@ -74,28 +63,11 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
 
-
-CustomerDetailsComponent,
-    CustomerComponent,
     LoginComponent,
     MainLayoutComponent,
     SigninComponent,
     ListuserComponent,
-CalendarComponent,
-    CarloadComponent,
-    ManagerComponent,
-    SprintComponent,
-    DriverComponent,
-    SprintDetailsComponent,
-    PaymentComponent,
-    PaymentDetailsComponent,
-    CustomerDetailsComponent,
-    StudentComponent,
-    TeacherComponent,
-    ClassroomComponent,
-ReciboComponent,
-    ProjetoComponent
-    ,VehicleComponent,
+    VehicleComponent
 
 
   ],
@@ -112,7 +84,6 @@ ReciboComponent,
     NzButtonComponent,
     NzDividerComponent,
     NzTableModule,
-
 
 
     NzLayoutModule,
