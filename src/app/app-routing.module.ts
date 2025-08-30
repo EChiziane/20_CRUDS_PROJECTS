@@ -7,6 +7,7 @@ import {ListuserComponent} from './UASM/listuser/listuser.component';
 
 
 import {VehicleComponent} from './vehicle/vehicle.component';
+import {EmployeeComponent} from './employee/employee.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
 
   {path: 'login', component: LoginComponent},
   {path: 'register', component: SigninComponent},
+  {path: 'employee', component: EmployeeComponent},
   {path: 'users', component: ListuserComponent},
 
 

@@ -1,0 +1,95 @@
+<div class="main-content">
+  <div class="header">
+    <p>Employee List</p>
+  </div>
+
+  <div class="filter">
+    <input (ngModelChange)="search()" [(ngModel)]="searchValue" nz-input placeholder="Search..." type="text"/>
+    <button (click)="openEmployeeDrawer()" nz-button nzType="primary">New Employee</button>
+  </div>
+
+  <div class="table-container">
+    <nz-table #nzTable [nzData]="employees" [nzScroll]="{ x: '800px', y: '280px'}" nzTableLayout="fixed">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Salary</th>
+        <th>Hire Date</th>
+        <th>Department</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.position }}</td>
+        <td>{{ employee.salary | currency }}</td>
+        <td>{{ employee.hireDate | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ employee.department }}</td>
+        <td>{{ employee.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <button (click)="editEmployee(employee)" nz-button nzSize="small" nzType="link">
+            <nz-icon nzType="edit"></nz-icon>
+          </button>
+          <button (click)="deleteEmployee(employee)" nz-button nzDanger nzSize="small" nzType="link">
+            <nz-icon nzType="delete"></nz-icon>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+<!-- Employee Drawer -->
+<nz-drawer
+  (nzOnClose)="closeEmployeeDrawer()"
+  [nzTitle]="drawerTitle"
+  [nzFooter]="nzDrawerFooter"
+  [nzVisible]="isEmployeeDrawerVisible"
+  [nzWidth]="480"
+>
+  <form *nzDrawerContent [formGroup]="employeeForm" nz-form>
+    <nz-form-item>
+      <nz-form-label nzRequired>Name</nz-form-label>
+      <nz-form-control>
+        <input formControlName="name" nz-input placeholder="Employee name"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Position</nz-form-label>
+      <nz-form-control>
+        <input formControlName="position" nz-input placeholder="Position"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Salary</nz-form-label>
+      <nz-form-control>
+        <input formControlName="salary" nz-input type="number" placeholder="Salary"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Hire Date</nz-form-label>
+      <nz-form-control>
+        <input formControlName="hireDate" nz-input type="date"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Department</nz-form-label>
+      <nz-form-control>
+        <input formControlName="department" nz-input placeholder="Department"/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+  <ng-template #nzDrawerFooter>
+    <button (click)="closeEmployeeDrawer()" nz-button>Cancel</button>
+    <button (click)="submitEmployee()" [disabled]="!employeeForm.valid" nz-button nzType="primary">Save</button>
+  </ng-template>
+</nz-drawer>
