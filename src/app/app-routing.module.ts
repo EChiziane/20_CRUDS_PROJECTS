@@ -21,6 +21,7 @@ import {TeacherComponent} from './teacher/teacher.component';
 import {ClassroomComponent} from './classroom/classroom.component';
 import {ReciboComponent} from './recibo/recibo.component';
 import {ProjetoComponent} from './projeto/projeto.component';
+import {VehicleComponent} from './vehicle/vehicle.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path: 'projectos', component:ProjetoComponent},
   {path: 'classroom', component:ClassroomComponent},
   {path: 'recibo', component:ReciboComponent},
+  {path: 'vehicles', component:VehicleComponent},
   {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)}
 ];
 

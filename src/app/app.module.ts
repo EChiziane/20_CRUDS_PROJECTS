@@ -64,6 +64,7 @@ import {TeacherComponent} from './teacher/teacher.component';
 import {ClassroomComponent} from './classroom/classroom.component';
 import {ReciboComponent} from './recibo/recibo.component';
 import {ProjetoComponent} from './projeto/projeto.component';
+import {VehicleComponent} from './vehicle/vehicle.component';
 
 
 
@@ -94,6 +95,7 @@ CalendarComponent,
     ClassroomComponent,
 ReciboComponent,
     ProjetoComponent
+    ,VehicleComponent,
 
 
   ],
