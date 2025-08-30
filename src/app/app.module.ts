@@ -56,6 +56,7 @@ import {MatButton} from '@angular/material/button';
 
 import {VehicleComponent} from './vehicle/vehicle.component';
 import {EmployeeComponent} from './employee/employee.component';
+import {ProductComponent} from './product/product.component';
 
 
 registerLocaleData(en);
@@ -63,13 +64,13 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-
     LoginComponent,
     MainLayoutComponent,
     SigninComponent,
     ListuserComponent,
-    VehicleComponent
-,EmployeeComponent
+    VehicleComponent,
+    EmployeeComponent,
+    ProductComponent
 
   ],
   imports: [
@@ -85,8 +86,6 @@ registerLocaleData(en);
     NzButtonComponent,
     NzDividerComponent,
     NzTableModule,
-
-
     NzLayoutModule,
     NzDropDownModule,
     NzMenuModule,
@@ -95,7 +94,6 @@ registerLocaleData(en);
     NzButtonComponent,
     NzDividerComponent,
     NzTableModule,
-
     NzFilterTriggerComponent,
     NzThAddOnComponent,
     NzRowDirective,
@@ -125,8 +123,6 @@ registerLocaleData(en);
     NzSwitchModule,
     NzStatisticComponent,
     NzCalendarComponent,
-
-
     NzFilterTriggerComponent,
     NzThAddOnComponent,
     NzRowDirective,
@@ -171,7 +167,6 @@ registerLocaleData(en);
     MatSelect,
     MatOption,
     MatButton
-
   ],
   providers: [
     {
