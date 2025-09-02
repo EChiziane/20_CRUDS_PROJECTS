@@ -57,6 +57,7 @@ import {MatButton} from '@angular/material/button';
 import {VehicleComponent} from './vehicle/vehicle.component';
 import {EmployeeComponent} from './employee/employee.component';
 import {ProductComponent} from './product/product.component';
+import {CustomerComponent} from './customer/customer.component';
 
 
 registerLocaleData(en);
@@ -70,7 +71,8 @@ registerLocaleData(en);
     ListuserComponent,
     VehicleComponent,
     EmployeeComponent,
-    ProductComponent
+    ProductComponent,
+    CustomerComponent
 
   ],
   imports: [

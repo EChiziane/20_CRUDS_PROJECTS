@@ -6,6 +6,7 @@ import {ListuserComponent} from './UASM/listuser/listuser.component';
 import {VehicleComponent} from './vehicle/vehicle.component';
 import {EmployeeComponent} from './employee/employee.component';
 import {ProductComponent} from './product/product.component';
+import {CustomerComponent} from './customer/customer.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'product', component: ProductComponent},
   {path: 'users', component: ListuserComponent},
   {path: 'vehicles', component: VehicleComponent},
+  {path: 'customer', component:CustomerComponent},
   {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)}
 ];
 
