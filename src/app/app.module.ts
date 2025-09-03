@@ -58,6 +58,8 @@ import {VehicleComponent} from './vehicle/vehicle.component';
 import {EmployeeComponent} from './employee/employee.component';
 import {ProductComponent} from './product/product.component';
 import {CustomerComponent} from './customer/customer.component';
+import {BookComponent} from './book/book.component';
+import {PedidoComponent} from './pedido/pedido.component';
 
 
 registerLocaleData(en);
@@ -72,7 +74,9 @@ registerLocaleData(en);
     VehicleComponent,
     EmployeeComponent,
     ProductComponent,
-    CustomerComponent
+    CustomerComponent,
+    BookComponent,
+PedidoComponent
 
   ],
   imports: [

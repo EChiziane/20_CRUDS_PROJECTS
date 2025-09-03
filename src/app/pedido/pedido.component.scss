@@ -4,21 +4,26 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .header {
   margin-bottom: 14px;
-}
-
-.filter {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 .table-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   background: white;
   border-radius: 8px;
-  padding: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.table-scroll {
+  flex: 1;
+  overflow: auto;
+  padding: 0 16px 16px 16px;
 }

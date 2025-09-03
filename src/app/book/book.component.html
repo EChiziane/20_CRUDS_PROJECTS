@@ -1,0 +1,88 @@
+<div class="main-content">
+  <div class="header">
+    <p>Book List</p>
+  </div>
+
+  <div class="filter">
+    <input [(ngModel)]="searchValue" (ngModelChange)="search()" nz-input placeholder="Search books..." />
+    <button nz-button nzType="primary" (click)="openDrawer()">New Book</button>
+  </div>
+
+  <div class="table-container">
+    <nz-table [nzData]="listOfBooks" [nzScroll]="{ x: '800px', y: '300px'}" nzTableLayout="fixed">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Year</th>
+        <th>ISBN</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let book of listOfBooks">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.publisher }}</td>
+        <td>{{ book.publicationYear }}</td>
+        <td>{{ book.isbn }}</td>
+        <td>
+          <button nz-button nzType="link" (click)="editBook(book)">Edit</button>
+          <button nz-button nzType="link" nzDanger (click)="deleteBook(book)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+<nz-drawer
+  [nzTitle]="drawerTitle"
+  [nzVisible]="isDrawerVisible"
+  (nzOnClose)="closeDrawer()"
+  [nzWidth]="480"
+  [nzFooter]=nzDrawerFooter
+>
+  <form *nzDrawerContent [formGroup]="bookForm" nz-form>
+    <nz-form-item>
+      <nz-form-label nzFor="title" nzRequired>Title</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="title" id="title" placeholder="Book title" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="author" nzRequired>Author</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="author" id="author" placeholder="Book author" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="publisher" nzRequired>Publisher</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="publisher" id="publisher" placeholder="Publisher" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="publicationYear" nzRequired>Publication Year</nz-form-label>
+      <nz-form-control>
+        <input nz-input type="number" formControlName="publicationYear" id="publicationYear" placeholder="Year" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="isbn" nzRequired>ISBN</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="isbn" id="isbn" placeholder="ISBN number" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+  <ng-template #nzDrawerFooter>
+    <button nz-button (click)="closeDrawer()">Cancel</button>
+    <button nz-button nzType="primary" (click)="submitBook()" [disabled]="!bookForm.valid">Save</button>
+  </ng-template>
+</nz-drawer>

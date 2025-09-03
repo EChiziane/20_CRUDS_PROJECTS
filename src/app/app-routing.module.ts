@@ -7,6 +7,8 @@ import {VehicleComponent} from './vehicle/vehicle.component';
 import {EmployeeComponent} from './employee/employee.component';
 import {ProductComponent} from './product/product.component';
 import {CustomerComponent} from './customer/customer.component';
+import {BookComponent} from './book/book.component';
+import {PedidoComponent} from './pedido/pedido.component';
 
 
 const routes: Routes = [
@@ -19,6 +21,8 @@ const routes: Routes = [
   {path: 'users', component: ListuserComponent},
   {path: 'vehicles', component: VehicleComponent},
   {path: 'customer', component:CustomerComponent},
+  {path: 'book', component:BookComponent},
+  {path: 'pedido', component:PedidoComponent},
   {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)}
 ];
 
