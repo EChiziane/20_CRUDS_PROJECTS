@@ -2,10 +2,17 @@ import { Reservation } from "../models/reservation";
 import {Observable, take} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environments';
+import {Injectable} from '@angular/core';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+
 
 export class ReservationService {
 
-  private baseURL = environment.baseURL + "/reservations";
+  private baseURL = environment.baseURL + "/hotel-reservations";
 
   constructor(private http: HttpClient) { }
 

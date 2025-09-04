@@ -60,6 +60,7 @@ import {ProductComponent} from './product/product.component';
 import {CustomerComponent} from './customer/customer.component';
 import {BookComponent} from './book/book.component';
 import {PedidoComponent} from './pedido/pedido.component';
+import {ReservationComponent} from './reservation/reservation.component';
 
 
 registerLocaleData(en);
@@ -76,7 +77,8 @@ registerLocaleData(en);
     ProductComponent,
     CustomerComponent,
     BookComponent,
-PedidoComponent
+PedidoComponent,
+    ReservationComponent
 
   ],
   imports: [
