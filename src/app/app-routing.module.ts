@@ -10,6 +10,7 @@ import {CustomerComponent} from './customer/customer.component';
 import {BookComponent} from './book/book.component';
 import {PedidoComponent} from './pedido/pedido.component';
 import {ReservationComponent} from './reservation/reservation.component';
+import {BankaccountComponent} from './bankaccount/bankaccount.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'book', component:BookComponent},
   {path: 'pedido', component:PedidoComponent},
   {path: 'reservation', component:ReservationComponent},
+  {path: 'bankaccount', component:BankaccountComponent},
   {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)}
 ];
 
